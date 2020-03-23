@@ -19,14 +19,14 @@ SECTIONS
         stext = .;
         *(.text.entry)
         *(.text .text.*)
-		. = ALIGN(8);
+        . = ALIGN(8);
         etext = .;
     }
 
     .rodata : {
         srodata = .;
         *(.rodata .rodata.*)
-		. = ALIGN(8);
+        . = ALIGN(8);
         erodata = .;
     }
 
