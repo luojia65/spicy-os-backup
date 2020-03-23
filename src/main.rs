@@ -14,7 +14,13 @@ use core::panic::PanicInfo;
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
+    virt_console_putc(b'\n');
     virt_console_putc(b'P');
+    virt_console_putc(b'a');
+    virt_console_putc(b'n');
+    virt_console_putc(b'i');
+    virt_console_putc(b'c');
+    virt_console_putc(b'\n');
     // println!("{}", info);
     power_down()
 }
@@ -35,10 +41,11 @@ extern "C" fn rust_main() -> ! {
     //     virt_console_putchar(*ch);
     // }
     virt_console_putc(b'N');
+    puts("1235");
     virt_console_putc(b'B');
     virt_console_putc(b'\n');
-    // puts("123");
-    println!();
+    puts("1235");
+    // println!();
     virt_console_putc(b'6');
     // crate::trap::init();
     // unsafe {
