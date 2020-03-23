@@ -1,0 +1,50 @@
+/* Copy from bbl-ucore : https://ring00.github.io/bbl-ucore      */
+
+/* Simple linker script for the ucore kernel.
+   See the GNU ld 'info' manual ("info ld") to learn the syntax. */
+
+OUTPUT_ARCH(riscv)
+ENTRY(_start)
+PROVIDE(_stack_start = ORIGIN(REGION_STACK) + LENGTH(REGION_STACK));
+
+BASE_ADDRESS = 0x80400000;
+
+SECTIONS
+{
+    /* Load the kernel at this address: "." means the current address */
+    . = BASE_ADDRESS;
+    start = .;
+
+    .text : {
+        stext = .;
+        *(.text.entry)
+        *(.text .text.*)
+		. = ALIGN(8);
+        etext = .;
+    }
+
+    .rodata : {
+        srodata = .;
+        *(.rodata .rodata.*)
+		. = ALIGN(8);
+        erodata = .;
+    }
+
+    .data : {
+        sdata = .;
+        *(.data .data.*)
+        edata = .;
+    }
+
+    .stack : {
+        *(.bss.stack)
+    }
+
+    .bss : {
+        sbss = .;
+        *(.bss .bss.*)
+        ebss = .;
+    }
+
+    PROVIDE(end = .);
+}
