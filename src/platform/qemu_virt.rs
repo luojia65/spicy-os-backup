@@ -5,14 +5,21 @@ pub use test::*;
 
 use core::fmt::{self, Write};
 
+#[doc(hidden)] // todo remove
+pub fn puts(s: &str) {
+    for &ch in s.as_bytes() {
+        uart::virt_console_putc(ch);
+    }
+}
+
 struct Stdout(());
 
 static STDOUT: spin::Mutex<Stdout> = spin::Mutex::new(Stdout(()));
 
 impl fmt::Write for Stdout {
     fn write_str(&mut self, s: &str) -> fmt::Result {
-        for ch in s.chars() {
-            uart::virt_console_putc(ch as u8);
+        for &ch in s.as_bytes() {
+            uart::virt_console_putc(ch);
         }
         Ok(())
     }

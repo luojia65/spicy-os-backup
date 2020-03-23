@@ -37,6 +37,7 @@ extern "C" fn rust_main() -> ! {
     virt_console_putc(b'N');
     virt_console_putc(b'B');
     virt_console_putc(b'\n');
+    // puts("123");
     println!();
     virt_console_putc(b'6');
     // crate::trap::init();
