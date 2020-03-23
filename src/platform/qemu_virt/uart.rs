@@ -1,4 +1,4 @@
-// Ref: riscv/opensbi/lib/utils/serial/uart8250.c
+// Ref: https://github.com/riscv/opensbi/blob/master/lib/utils/serial/uart8250.c
 #![allow(unused)]
 use core::fmt::{self, Write};
 

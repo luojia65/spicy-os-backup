@@ -7,9 +7,9 @@ use core::fmt::{self, Write};
 
 #[doc(hidden)] // todo remove
 pub fn puts(s: &str) {
-    for &ch in s.as_bytes() {
-        panic!("!");
-        uart::virt_console_putc(ch);
+    for ch in s.as_bytes() {
+        // panic!("!");
+        uart::virt_console_putc(*ch);
     }
 }
 
