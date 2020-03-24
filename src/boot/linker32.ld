@@ -31,6 +31,7 @@ SECTIONS
 
     .data : {
         sdata = .;
+        PROVIDE(__global_pointer$ = . + 0x800);
         *(.data .data.*)
         edata = .;
     }
