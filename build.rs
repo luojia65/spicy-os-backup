@@ -3,4 +3,5 @@
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=src/boot/linker32.ld");
+    println!("cargo:rerun-if-changed=src/boot/entry32.asm");
 }

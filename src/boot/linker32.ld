@@ -1,8 +1,3 @@
-/* Copy from bbl-ucore : https://ring00.github.io/bbl-ucore      */
-
-/* Simple linker script for the ucore kernel.
-   See the GNU ld 'info' manual ("info ld") to learn the syntax. */
-
 OUTPUT_ARCH(riscv)
 ENTRY(_start)
 
@@ -18,20 +13,19 @@ SECTIONS
         stext = .;
         *(.text.entry)
         *(.text .text.*)
-        . = ALIGN(8);
+        . = ALIGN(4K);
         etext = .;
     }
 
     .rodata : {
         srodata = .;
         *(.rodata .rodata.*)
-        . = ALIGN(8);
+        . = ALIGN(4K);
         erodata = .;
     }
 
     .data : {
         sdata = .;
-        PROVIDE(__global_pointer$ = . + 0x800);
         *(.data .data.*)
         edata = .;
     }

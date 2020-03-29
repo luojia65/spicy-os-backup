@@ -5,12 +5,13 @@ mode := debug
 addr := 0x80400000
 
 kernel := target/$(triple)/$(mode)/$(package)
-bin := target/$(target)/$(mode)/kernel.bin
-objdump := rust-objdump --arch-name=$(arch)
+bin := target/$(triple)/$(mode)/kernel.bin
+# objdump := rust-objdump --arch-name=$(arch)
+objdump := riscv32-unknown-elf-objdump
 objcopy := rust-objcopy --binary-architecture=$(arch)
 qemu := qemu-system-$(arch)
 
-.PHONY: kernel build qemu run clean asm
+.PHONY: kernel build qemu run clean asm readelf
 
 kernel: 
 	cargo build
@@ -24,13 +25,16 @@ qemu: build
 	$(qemu) \
         -machine virt \
         -nographic \
-        -bios $(bin) 
-        # -device loader,file=$(bin),addr=$(addr)
+        -bios default \
+        -device loader,file=$(bin),addr=$(addr)
 
 run: build qemu
 
 asm:
 	$(objdump) -d $(kernel) | less
+
+readelf:
+	$(readelf) -S $(kernel) | less
 
 clean:
 	cargo clean
